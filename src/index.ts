@@ -2,24 +2,17 @@ import _knex from 'knex'
 import { Knex } from 'knex'
 var mysql = require('mysql')
 
-export default function (a: number, b: number): number {
-    return a + b
-}
-
 export type 配置格式 = {
-    client: 'mysql'
-    connection: {
-        host: string
-        user: string
-        password: string
-        database: string
-    }
+    host: string
+    user: string
+    password: string
+    database: string
 }
 export async function 新建数据库(conf: 配置格式, 数据库名称: string) {
     var connection = mysql.createConnection({
-        host: conf.connection.host,
-        user: conf.connection.user,
-        password: conf.connection.password,
+        host: conf.host,
+        user: conf.user,
+        password: conf.password,
     })
 
     connection.connect()
@@ -37,14 +30,14 @@ export async function 新建数据库(conf: 配置格式, 数据库名称: strin
     connection.end()
 }
 export async function 删除所有表(conf: 配置格式) {
-    var knex = _knex(conf)
+    var knex = _knex({
+        client: 'mysql',
+        connection: conf,
+    })
 
     try {
         var 所有表: string[] = (
-            await knex
-                .select('TABLE_NAME')
-                .from('information_schema.TABLES')
-                .where({ table_schema: conf.connection.database })
+            await knex.select('TABLE_NAME').from('information_schema.TABLES').where({ table_schema: conf.database })
         ).map((a: any) => a.TABLE_NAME)
 
         var 删除所有外键约束: string[] = (
@@ -52,7 +45,7 @@ export async function 删除所有表(conf: 配置格式) {
             SELECT concat('alter table ',table_schema,'.',table_name,' DROP FOREIGN KEY ',constraint_name,';')
             FROM information_schema.table_constraints
             WHERE constraint_type='FOREIGN KEY'
-            AND table_schema='${conf.connection.database}'
+            AND table_schema='${conf.database}'
         `)
         )[0].map((a: any) => (Object.values(a)[0] as string).trim())
         for (var sql of 删除所有外键约束) {
@@ -67,7 +60,10 @@ export async function 删除所有表(conf: 配置格式) {
     }
 }
 export async function 新建表(conf: 配置格式, schema: (knex: Knex<any, unknown[]>) => Knex.SchemaBuilder) {
-    var knex = _knex(conf)
+    var knex = _knex({
+        client: 'mysql',
+        connection: conf,
+    })
 
     try {
         var cmd = await schema(knex).generateDdlCommands()
@@ -100,7 +96,10 @@ export async function 新建表(conf: 配置格式, schema: (knex: Knex<any, unk
     }
 }
 export async function 生成ts类型描述(conf: 配置格式) {
-    var knex = _knex(conf)
+    var knex = _knex({
+        client: 'mysql',
+        connection: conf,
+    })
 
     try {
         var 描述 = await knex
@@ -117,7 +116,7 @@ export async function 生成ts类型描述(conf: 配置格式) {
                 }[]
             >()
             .from('information_schema.columns')
-            .where({ table_schema: conf.connection.database })
+            .where({ table_schema: conf.database })
 
         var 整理 = 描述
             .map((a) => a.TABLE_NAME)

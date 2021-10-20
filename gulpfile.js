@@ -15,7 +15,7 @@ exports.编译ts = async function 编译ts() {
 }
 exports.持续编译ts = async function 持续编译ts() {
     process.stdout.write('持续编译ts...')
-    watch('src/**/*.ts', { ignoreInitial: false }, exports.编译ts)
+    watch(['src/**/*.ts', 'test/**/*.ts', 'bin/**/*.ts'], { ignoreInitial: false }, exports.编译ts)
     console.log('ok')
 }
 exports.测试 = async function 测试() {

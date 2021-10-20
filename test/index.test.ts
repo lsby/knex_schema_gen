@@ -1,16 +1,7 @@
 import 'mocha'
-import { 删除所有表, 新建数据库, 新建表, 生成ts类型描述, 配置格式 } from '../src/index'
+import { 删除所有表, 新建数据库, 新建表, 生成ts类型描述 } from '../src/index'
 import schema from './schema'
-
-var conf: 配置格式 = {
-    client: 'mysql',
-    connection: {
-        host: '127.0.0.1',
-        user: 'root',
-        password: '',
-        database: 'test',
-    },
-}
+import conf from './conf'
 
 describe('测试组', function () {
     it('新建数据库', async function () {
