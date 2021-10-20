@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { Command } from 'commander'
 import fs from 'fs'
 import path from 'path'
@@ -38,7 +40,7 @@ program
 
 文件示例:
 
-    dbconf 文件示例: https://raw.githubusercontent.com/lsby/knex_schema_gen/master/doc/conf.js
+    dbconf 文件示例: https://raw.githubusercontent.com/lsby/knex_schema_gen/master/doc/dbconf.js
     schema 文件示例: https://raw.githubusercontent.com/lsby/knex_schema_gen/master/doc/schema.js
 
 也可以在代码中使用, 更多信息:

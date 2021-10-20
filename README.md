@@ -7,10 +7,10 @@
 ### 命令行用法
 
 ```shell
-npx @lsby/knex-schema-gen -c ./dbconf.js -s ./schema.js -o ./types.ts
+npx @lsby/knex_schema_gen -c ./dbconf.js -s ./schema.js -o ./types.ts
 ```
 
-dbconf 文件示例: https://raw.githubusercontent.com/lsby/knex_schema_gen/master/doc/conf.js
+dbconf 文件示例: https://raw.githubusercontent.com/lsby/knex_schema_gen/master/doc/dbconf.js
 schema 文件示例: https://raw.githubusercontent.com/lsby/knex_schema_gen/master/doc/schema.js
 
 ### 代码用法
