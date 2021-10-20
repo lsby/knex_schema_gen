@@ -1,4 +1,4 @@
-# knex-schema-gen
+# knex_schema_gen
 
 通过 schema 文件生成数据库表结构(仅支持 mysql), 同时生成 ts 类型描述.
 
@@ -13,6 +13,7 @@ npx @lsby/knex_schema_gen@latest -c ./dbconf.js -s ./schema.js -o ./types.ts
 ```
 
 dbconf 文件示例: https://raw.githubusercontent.com/lsby/knex_schema_gen/master/doc/dbconf.js
+
 schema 文件示例: https://raw.githubusercontent.com/lsby/knex_schema_gen/master/doc/schema.js
 
 ### 代码用法
@@ -38,4 +39,5 @@ main()
 ```
 
 dbconf 文件示例: https://raw.githubusercontent.com/lsby/knex_schema_gen/master/test/dbconf.ts
+
 schema 文件示例: https://raw.githubusercontent.com/lsby/knex_schema_gen/master/test/schema.ts
