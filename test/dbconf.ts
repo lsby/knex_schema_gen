@@ -1,6 +1,4 @@
-import { 配置格式 } from '../src'
-
-var dbconf: 配置格式 = {
+var dbconf = {
     host: '127.0.0.1',
     user: 'root',
     password: '',

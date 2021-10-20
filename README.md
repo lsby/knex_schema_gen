@@ -6,14 +6,22 @@
 
 ### 命令行用法
 
+**注意: 若带有-s 参数, 会清空数据库的所有数据, 请谨慎操作.**
+
 ```shell
-npx @lsby/knex_schema_gen -c ./dbconf.js -s ./schema.js -o ./types.ts
+npx @lsby/knex_schema_gen@latest -c ./dbconf.js -s ./schema.js -o ./types.ts
 ```
 
 dbconf 文件示例: https://raw.githubusercontent.com/lsby/knex_schema_gen/master/doc/dbconf.js
 schema 文件示例: https://raw.githubusercontent.com/lsby/knex_schema_gen/master/doc/schema.js
 
 ### 代码用法
+
+安装:
+
+```shell
+npm i @lsby/knex_schema_gen
+```
 
 ```typescript
 import { 删除所有表, 新建表, 生成ts类型描述 } from '@lsby/knex_schema_gen'
