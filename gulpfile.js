@@ -1,7 +1,6 @@
 var { watch } = require('gulp')
 var path = require('path')
 var exec = require('@lsby/exec_cmd').default
-var opn = require('better-opn')
 
 exports.编译ts = async function 编译ts() {
     process.stdout.write('编译ts...')
