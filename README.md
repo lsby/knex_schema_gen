@@ -2,6 +2,14 @@
 
 通过 schema 文件生成数据库表结构(仅支持 mysql), 同时生成 ts 类型描述.
 
+## 能做什么
+
+knex 是一个通过链式写法组装 sql 的库, 同时它提供了 schema 来通过链式写法构造数据库结构. 地址: https://github.com/knex/knex
+
+这个库可以方便的让你通过 knex 的 schema 轻松构造表结构. schema 的语法参考: https://knexjs.org/#Schema-createTable
+
+如果你使用 ts 且使用 knex 拼接 sql 语句, 这个库还可以通过数据库结构生成 ts 用的 types 文件. 参考: https://knexjs.org/#typescript-support
+
 ## 快速开始
 
 ### 命令行用法
