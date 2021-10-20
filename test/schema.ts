@@ -1,7 +1,7 @@
 import * as _knex from 'knex'
 import { Knex } from 'knex'
 
-export default function (knex: Knex<any, unknown[]>): Knex.SchemaBuilder {
+function schema(knex: Knex<any, unknown[]>): Knex.SchemaBuilder {
     var r = knex.schema
         .createTable('学生表', function (table) {
             table.increments()
@@ -18,3 +18,4 @@ export default function (knex: Knex<any, unknown[]>): Knex.SchemaBuilder {
 
     return r
 }
+export { schema }

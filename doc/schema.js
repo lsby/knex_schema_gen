@@ -1,4 +1,4 @@
-function default_1(knex) {
+function schema(knex) {
     var r = knex.schema
         .createTable('学生表', function (table) {
             table.increments()
@@ -14,4 +14,4 @@ function default_1(knex) {
         })
     return r
 }
-exports.default = default_1
+exports.schema = schema

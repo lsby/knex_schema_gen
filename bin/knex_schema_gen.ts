@@ -20,7 +20,7 @@ program
     .name('lsby_knex_schema_gen')
     .usage('[options]')
     .addHelpText('beforeAll', '通过schema文件重建数据库')
-    .requiredOption('-c, --conf <conf_file.js>', '数据库配置文件')
+    .requiredOption('-c, --dbconf <conf_file.js>', '数据库配置文件')
     .option('-s, --schema <schema_file.js>', 'schema文件')
     .option('-o, --out <types_file.ts>', 'ts类型文件输出路径')
     .version(packageFile.version, '-v, --ver', '输出版本号')
@@ -30,21 +30,20 @@ program
 命令示例:
 
     清空给定配置文件的数据库, 并通过schema文件重建表结构:
-    lsby_knex_schema_gen -c ./dbConf.js -s ./schemaFile.js
+    lsby_knex_schema_gen -c ./dbconf.js -s ./schema.js
 
     读取给定配置文件的数据库, 生成knex对应的ts类型描述文件:
-    lsby_knex_schema_gen -c ./dbConf.js -o ./types.ts
+    lsby_knex_schema_gen -c ./dbconf.js -o ./types.ts
 
     清空给定配置文件的数据库, 通过schema文件重建表结构, 同时生成knex对应的ts类型描述文件:
-    lsby_knex_schema_gen -c ./dbConf.js -s ./schemaFile.js -o ./types.ts
+    lsby_knex_schema_gen -c ./dbconf.js -s ./schema.js -o ./types.ts
 
 文件示例:
 
     dbconf 文件示例: https://raw.githubusercontent.com/lsby/knex_schema_gen/master/doc/dbconf.js
     schema 文件示例: https://raw.githubusercontent.com/lsby/knex_schema_gen/master/doc/schema.js
 
-也可以在代码中使用, 更多信息:
-    https://github.com/lsby/knex_schema_gen
+也可以在代码中使用, 更多信息: https://github.com/lsby/knex_schema_gen
         `,
     )
 
@@ -52,10 +51,10 @@ async function main() {
     program.parse(process.argv)
     var opts = program.opts()
 
-    var conf = path.resolve(cwd(), opts.conf)
+    var dbconf = path.resolve(cwd(), opts.dbconf)
 
-    if (!fs.existsSync(conf)) {
-        console.error(`配置文件不存在: ${conf}`)
+    if (!fs.existsSync(dbconf)) {
+        console.error(`配置文件不存在: ${dbconf}`)
         exit(1)
     }
 
@@ -64,25 +63,25 @@ async function main() {
         exit(1)
     }
 
-    var confObj = (await import(conf)).default
+    var dbconfObj = (await import(dbconf)).dbconf
     if (opts.schema != null) {
         var schema = path.resolve(cwd(), opts.schema)
         if (!fs.existsSync(schema)) {
             console.error(`schema文件不存在: ${schema}`)
             exit(1)
         }
-        var schemaObj = (await import(schema)).default
+        var schemaObj = (await import(schema)).schema
 
-        await 删除所有表(confObj)
+        await 删除所有表(dbconfObj)
         console.log('删除表成功')
 
-        await 新建表(confObj, schemaObj)
+        await 新建表(dbconfObj, schemaObj)
         console.log('重建表成功')
     }
 
     if (opts.out != null) {
         var out = path.resolve(cwd(), opts.out)
-        var s = await 生成ts类型描述(confObj)
+        var s = await 生成ts类型描述(dbconfObj)
         await mkdirp(path.dirname(out))
         fs.writeFileSync(out, s)
         console.log('生成类型描述成功')

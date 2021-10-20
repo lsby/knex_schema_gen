@@ -1,20 +1,20 @@
 import 'mocha'
 import { 删除所有表, 新建数据库, 新建表, 生成ts类型描述 } from '../src/index'
-import schema from './schema'
-import conf from './conf'
+import { schema } from './schema'
+import { dbconf } from './dbconf'
 
 describe('测试组', function () {
     it('新建数据库', async function () {
-        await 新建数据库(conf, 'test')
+        await 新建数据库(dbconf, 'test')
     })
     it('删除所有表', async function () {
-        await 删除所有表(conf)
+        await 删除所有表(dbconf)
     })
     it('新建表', async function () {
-        await 新建表(conf, schema)
+        await 新建表(dbconf, schema)
     })
     it('生成ts类型描述', async function () {
-        var 类型描述 = await 生成ts类型描述(conf)
+        var 类型描述 = await 生成ts类型描述(dbconf)
 
         var s = `
             import { Knex } from "knex"

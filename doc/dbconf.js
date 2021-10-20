@@ -1,7 +1,7 @@
-var conf = {
+var dbconf = {
     host: '127.0.0.1',
     user: 'root',
     password: '',
     database: 'test',
 }
-exports.default = conf
+exports.dbconf = dbconf
