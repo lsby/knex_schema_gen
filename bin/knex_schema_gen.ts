@@ -38,11 +38,11 @@ program
 
 文件示例:
 
-    dbConf文件示例: xxx
-    schema文件示例: xxx
+    dbconf 文件示例: https://raw.githubusercontent.com/lsby/knex_schema_gen/master/doc/conf.js
+    schema 文件示例: https://raw.githubusercontent.com/lsby/knex_schema_gen/master/doc/schema.js
 
 也可以在代码中使用, 更多信息:
-    xxx
+    https://github.com/lsby/knex_schema_gen
         `,
     )
 

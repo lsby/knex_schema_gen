@@ -10,8 +10,8 @@
 npx @lsby/knex-schema-gen -c ./dbconf.js -s ./schema.js -o ./types.ts
 ```
 
-dbconf 文件示例: xxx
-schema 文件示例: xxx
+dbconf 文件示例: https://raw.githubusercontent.com/lsby/knex_schema_gen/master/doc/conf.js
+schema 文件示例: https://raw.githubusercontent.com/lsby/knex_schema_gen/master/doc/schema.js
 
 ### 代码用法
 
