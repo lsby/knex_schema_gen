@@ -109,7 +109,7 @@ export async function 生成ts类型描述(conf: 配置格式) {
                     COLUMN_NAME: string
                     COLUMN_DEFAULT: null | 'CURRENT_TIMESTAMP'
                     IS_NULLABLE: 'NO' | 'YES'
-                    DATA_TYPE: 'timestamp' | 'int' | 'varchar' | 'enum' | 'double' | 'tinyint'
+                    DATA_TYPE: 'timestamp' | 'int' | 'varchar' | 'enum' | 'double' | 'tinyint' | 'DECIMAL'
                     COLUMN_TYPE: string
                     EXTRA: 'DEFAULT_GENERATED' | 'auto_increment' | ''
                     COLUMN_COMMENT: string
@@ -138,6 +138,8 @@ export async function 生成ts类型描述(conf: 配置格式) {
                         } else if (b.COLUMN_TYPE == 'tinyint(1)') {
                             结果 = '0 | 1'
                         } else if (b.DATA_TYPE == 'tinyint') {
+                            结果 = 'number'
+                        } else if (b.DATA_TYPE == 'DECIMAL') {
                             结果 = 'number'
                         } else if (b.DATA_TYPE == 'enum') {
                             结果 = (b.COLUMN_TYPE as string)
