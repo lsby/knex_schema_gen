@@ -95,7 +95,7 @@ export async function 新建表(conf: 配置格式, schema: (knex: Knex<any, unk
         throw e
     }
 }
-export async function 生成ts类型描述(conf: 配置格式) {
+export async function 生成ts类型描述(conf: 配置格式, 模块名称?: string, 表路径?: string) {
     var knex = _knex({
         client: 'mysql',
         connection: conf,
@@ -156,7 +156,7 @@ export async function 生成ts类型描述(conf: 配置格式) {
             }))
 
         var ts描述 = [
-            ['import { Knex } from "knex"'],
+            [`import { Knex } from "${模块名称 || 'knex'}"`],
             [''],
             [
                 ...new Set(
@@ -169,7 +169,7 @@ export async function 生成ts类型描述(conf: 配置格式) {
                 ),
             ],
             [''],
-            ['declare module "knex/types/tables" {'],
+            [`declare module "${表路径 || 'knex/types/tables'}" {`],
             ['    interface Tables {'],
             [
                 ...new Set(

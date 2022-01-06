@@ -1,6 +1,6 @@
 {
     "name": "@lsby/knex_schema_gen",
-    "version": "0.0.9",
+    "version": "0.0.10",
     "description": "",
     "bin": {
         "lsby_knex_schema_gen": "./dist/bin/knex_schema_gen.js"
