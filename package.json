@@ -1,6 +1,6 @@
 {
     "name": "@lsby/knex_schema_gen",
-    "version": "0.0.10",
+    "version": "0.0.11",
     "description": "",
     "bin": {
         "lsby_knex_schema_gen": "./dist/bin/knex_schema_gen.js"
@@ -28,8 +28,10 @@
         "@types/mocha": "^8.2.2",
         "@types/node": "^16.11.1",
         "commander": "^8.2.0",
-        "knex": "^0.95.11",
         "mkdirp": "^1.0.4",
         "mysql": "^2.18.1"
+    },
+    "peerDependencies": {
+        "knex": "^1.0.4"
     }
 }
