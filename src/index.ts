@@ -85,7 +85,7 @@ export async function 新建表(conf: 配置格式, schema: (knex: Knex<any, unk
                 return a - b
             })
 
-        knex.transaction(async (trx) => {
+        await knex.transaction(async (trx) => {
             for (var sql of sqlarr) {
                 await trx.raw(sql)
             }
